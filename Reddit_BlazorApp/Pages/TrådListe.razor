@@ -1,0 +1,59 @@
+﻿@inherits LayoutComponentBase
+
+@using Reddit_BlazorApp.Data;
+@using Model;
+@inject ApiService apiService
+
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+@if (tråde == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table>
+        <tr>
+            <th>Overskrift</th>
+            <th>Indhold</th>
+            <th colspan="3">Votes</th>
+        </tr>
+        @foreach (var tråd in tråde)
+        {
+            <tr>
+                <!-- 
+                    These a href links will match the route in the page 'PostItem.razor'.
+                    The route is defined as "/post/{id}" and the id is the post id.
+                -->
+                <td><a href="/tråd/@tråd.TrådID">@tråd.Overskrift</a></td>
+                <td>@tråd.Indhold</td>
+                <td>@(tråd.UpVotes - tråd.DownVotes)</td>
+                <td><button @onclick="() => UpVote(tråd.TrådID)">Upvote</button></td>
+                <td><button @onclick="() => DownVote(tråd.TrådID)">Downvote</button></td>
+            </tr>
+        }
+    </table>
+
+    <br/>
+}
+
+@code {
+    private Tråd[]? tråde;
+    private Tråd? voteTråd;
+
+    protected override async Task OnInitializedAsync()
+    {
+        tråde = await apiService.GetTråde();
+    }
+
+    private async void UpVote(int id)
+    {
+        var updatedPost = await apiService.UpVotesTråd(id);
+    }
+
+    private async void DownVote(int id)
+    {
+        Console.WriteLine("Not implemented 😪");
+    }
+}

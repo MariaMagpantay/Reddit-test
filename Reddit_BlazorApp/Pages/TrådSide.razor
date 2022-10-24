@@ -1,0 +1,80 @@
+﻿<!-- 
+Notice how this route has a route parameter 'id'. This is how we can pass data to the route.
+See how the links are made in 'PostList.razor'.
+-->
+@page "/tråd/{id}"
+
+@using Reddit_BlazorApp.Data;
+@using Model;
+@inject ApiService apiService
+
+<PageTitle>Semi-Reddit</PageTitle>
+
+<style>
+div.contents {
+  background-color: #f2f0eb;
+  width: 600px;
+  border: 2px solid #452d3d;
+  padding: 10px;
+  margin-top: 20px;
+}
+</style>
+
+@if (Tråd == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="contents">
+        <h4>@Tråd.Overskrift</h4>
+        <p><strong>Bruger: @Tråd.Bruger.BrugerNavn, Votes: @(Tråd.UpVotes - Tråd.DownVotes)</strong></p>
+        <p>@Tråd.Indhold</p>
+    </div>
+
+    <div class="contents">
+    <h4>Kommentarer</h4>
+    <table>
+        <tr>
+            <th>Bruger</th>
+            <th>Kommentar</th>
+            <th colspan="3">Votes</th>
+        </tr>
+        @foreach (var kommentar in Tråd.KommentarListe)
+        {
+            <tr>
+                <td>@kommentar.Bruger.BrugerNavn</td>
+                <td>@kommentar.Tekst</td>
+                <td>@(kommentar.UpVotes - kommentar.DownVotes)</td>
+                <td><button @onclick="() => UpVote(kommentar.KommentarID)">Upvote</button></td>
+                <td><button @onclick="() => DownVote(kommentar.KommentarID)">Downvote</button></td>
+            </tr>
+        }
+    </table>
+    </div>
+
+    <!-- This demonstrates how to pass in PostId to the component 'CreateComment'. See how 
+         it is used in the file CreateComment.razor -->
+    <CreateKommentar TrådID=@TrådID></CreateKommentar>
+}
+
+@code {
+    [Parameter]
+    public string ID { get; set; }
+    public int TrådID { get { return int.Parse(ID); } }
+    public Tråd Tråd { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Tråd = await apiService.GetTråd(TrådID);
+    }
+    private async void UpVote(int id)
+    {
+        Console.WriteLine("Not implemented 😪");
+    }
+
+    private async void DownVote(int id)
+    {
+        Console.WriteLine("Not implemented 😪");
+    }
+}
