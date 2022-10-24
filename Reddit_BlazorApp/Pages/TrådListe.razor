@@ -54,6 +54,6 @@ else
 
     private async void DownVote(int id)
     {
-        Console.WriteLine("Not implemented 😪");
+        var updatedPost = await apiService.DownVotesTråd(id);
     }
 }

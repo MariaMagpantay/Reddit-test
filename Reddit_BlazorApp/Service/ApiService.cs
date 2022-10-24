@@ -19,21 +19,23 @@ public class ApiService
         this.baseAPI = configuration["base_api"];
     }
 
+    //GET metoder
     public async Task<Tråd[]> GetTråde()
     {
-        string url = $"{baseAPI}tråde/";
+        string url = $"{baseAPI}tråde";
         return await http.GetFromJsonAsync<Tråd[]>(url);
     }
 
-    public async Task<Tråd> GetTråd(int id)
+    public async Task<Tråd> GetTråd(int trådID)
     {
-        string url = $"{baseAPI}tråd/{id}/";
+        string url = $"{baseAPI}tråd/{trådID}";
         return await http.GetFromJsonAsync<Tråd>(url);
     }
 
+    //POST metoder
     public async Task<Kommentar> CreateKommentar(int trådID, int brugerID, string tekst)
     {
-        string url = $"{baseAPI}tråd/{trådID}/";
+        string url = $"{baseAPI}tråd/{trådID}";
      
         // Post JSON to API, save the HttpResponseMessage
         HttpResponseMessage msg = await http.PostAsJsonAsync(url, new { tekst, brugerID });
@@ -50,9 +52,10 @@ public class ApiService
         return NyKommentar;
     }
 
+    //PUT metoder
     public async Task<Tråd> UpVotesTråd(int trådID)
     {
-        string url = $"{baseAPI}tråd/{trådID}/upvote/";
+        string url = $"{baseAPI}tråd/{trådID}/upvote";
 
         // Post JSON to API, save the HttpResponseMessage
         HttpResponseMessage msg = await http.PutAsJsonAsync(url, "");
@@ -62,6 +65,26 @@ public class ApiService
 
         // Deserialize the JSON string to a Post object
         Tråd? UpdatedTråd = JsonSerializer.Deserialize<Tråd>(json, new JsonSerializerOptions {
+            PropertyNameCaseInsensitive = true // Ignore case when matching JSON properties to C# properties
+        });
+
+        // Return the updated post (vote increased)
+        return UpdatedTråd;
+    }
+
+    public async Task<Tråd> DownVotesTråd(int trådID)
+    {
+        string url = $"{baseAPI}tråd/{trådID}/downvote";
+
+        // Post JSON to API, save the HttpResponseMessage
+        HttpResponseMessage msg = await http.PutAsJsonAsync(url, "");
+
+        // Get the JSON string from the response
+        string json = msg.Content.ReadAsStringAsync().Result;
+
+        // Deserialize the JSON string to a Post object
+        Tråd? UpdatedTråd = JsonSerializer.Deserialize<Tråd>(json, new JsonSerializerOptions
+        {
             PropertyNameCaseInsensitive = true // Ignore case when matching JSON properties to C# properties
         });
 
