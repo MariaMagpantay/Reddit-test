@@ -91,4 +91,44 @@ public class ApiService
         // Return the updated post (vote increased)
         return UpdatedTråd;
     }
+
+    public async Task<Kommentar> UpVotesKommentar(int kommentarID)
+    {
+        string url = $"{baseAPI}kommentar/{kommentarID}/upvote";
+
+        // Post JSON to API, save the HttpResponseMessage
+        HttpResponseMessage msg = await http.PutAsJsonAsync(url, "");
+
+        // Get the JSON string from the response
+        string json = msg.Content.ReadAsStringAsync().Result;
+
+        // Deserialize the JSON string to a Post object
+        Kommentar? UpdatedKommentar = JsonSerializer.Deserialize<Kommentar>(json, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true // Ignore case when matching JSON properties to C# properties
+        });
+
+        // Return the updated post (vote increased)
+        return UpdatedKommentar;
+    }
+
+    public async Task<Kommentar> DownVotesKommentar(int kommentarID)
+    {
+        string url = $"{baseAPI}kommentar/{kommentarID}/downvote";
+
+        // Post JSON to API, save the HttpResponseMessage
+        HttpResponseMessage msg = await http.PutAsJsonAsync(url, "");
+
+        // Get the JSON string from the response
+        string json = msg.Content.ReadAsStringAsync().Result;
+
+        // Deserialize the JSON string to a Post object
+        Kommentar? UpdatedKommentar = JsonSerializer.Deserialize<Kommentar>(json, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true // Ignore case when matching JSON properties to C# properties
+        });
+
+        // Return the updated post (vote increased)
+        return UpdatedKommentar;
+    }
 }

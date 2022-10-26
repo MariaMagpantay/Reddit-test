@@ -49,11 +49,11 @@ else
 
     private async void UpVote(int id)
     {
-        var updatedPost = await apiService.UpVotesTråd(id);
+        var updatedTråd = await apiService.UpVotesTråd(id);
     }
 
     private async void DownVote(int id)
     {
-        var updatedPost = await apiService.DownVotesTråd(id);
+        var updatedTråd = await apiService.DownVotesTråd(id);
     }
 }

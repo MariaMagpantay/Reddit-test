@@ -70,11 +70,11 @@ else
     }
     private async void UpVote(int id)
     {
-        Console.WriteLine("Not implemented 😪");
+        var updatedKommentar = await apiService.UpVotesKommentar(id);
     }
 
     private async void DownVote(int id)
     {
-        Console.WriteLine("Not implemented 😪");
+        var updatedKommentar = await apiService.DownVotesKommentar(id);
     }
 }
