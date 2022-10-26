@@ -45,6 +45,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         tråde = await apiService.GetTråde();
+        apiService.RefreshRequired += this.RefreshMe;
     }
 
     private async void UpVote(int id)
@@ -56,4 +57,11 @@ else
     {
         var updatedTråd = await apiService.DownVotesTråd(id);
     }
+
+    private async void RefreshMe()
+    {
+        tråde = await apiService.GetTråde();
+        StateHasChanged();
+        Console.WriteLine("Refreshed");
+    } 
 }

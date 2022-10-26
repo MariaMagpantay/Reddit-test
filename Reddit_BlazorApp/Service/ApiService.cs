@@ -12,11 +12,18 @@ public class ApiService
     private readonly IConfiguration configuration;
     private readonly string baseAPI = "";
 
+    public event Action RefreshRequired;
+
     public ApiService(HttpClient http, IConfiguration configuration)
     {
         this.http = http;
         this.configuration = configuration;
         this.baseAPI = configuration["base_api"];
+    }
+
+    public void CallRequestRefresh()
+    {
+        RefreshRequired?.Invoke();
     }
 
     //GET metoder
@@ -49,6 +56,7 @@ public class ApiService
         });
 
         // Return the new comment 
+        CallRequestRefresh();
         return NyKommentar;
     }
 
@@ -69,6 +77,7 @@ public class ApiService
         });
 
         // Return the updated post (vote increased)
+        CallRequestRefresh();
         return UpdatedTråd;
     }
 
@@ -89,6 +98,7 @@ public class ApiService
         });
 
         // Return the updated post (vote increased)
+        CallRequestRefresh();
         return UpdatedTråd;
     }
 
@@ -109,6 +119,7 @@ public class ApiService
         });
 
         // Return the updated post (vote increased)
+        CallRequestRefresh();
         return UpdatedKommentar;
     }
 
@@ -129,6 +140,7 @@ public class ApiService
         });
 
         // Return the updated post (vote increased)
+        CallRequestRefresh();
         return UpdatedKommentar;
     }
 }

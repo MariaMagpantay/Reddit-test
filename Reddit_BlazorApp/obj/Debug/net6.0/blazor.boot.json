@@ -199,13 +199,13 @@
       "mscorlib.dll": "sha256-TYLzIm125RbnX9+RAPqJnwZhd6CnQpJcrjiMpJfZ720=",
       "netstandard.dll": "sha256-HhuK9zDkd1N7hODAEiNJ11VF8T54IgrM6hZfLHmHdqM=",
       "System.Private.CoreLib.dll": "sha256-dXaTqyg1PnXPiSwywpic1PVrd7P8Vb5tN0i0\/urdt3E=",
-      "Reddit_BlazorApp.dll": "sha256-S3hPo\/K4GfHAVY+2GGCkfzefA9f5wWsceh7A2\/9nrjQ="
+      "Reddit_BlazorApp.dll": "sha256-F9ryjMXXafbkgPRGDnYXFvCNv809Sui2Mo7dke5HkKw="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
-      "Reddit_BlazorApp.pdb": "sha256-nufvlCU9j1+je0fPLWSfToO4ImaSAwsfiC0Z1zLrN08="
+      "Reddit_BlazorApp.pdb": "sha256-e7bee3\/P7aN2QwkaDsNmQoOsBvy5DvnYuUA1EqKIlVs="
     },
     "runtime": {
       "dotnet.6.0.8.czxdaatsxf.js": "sha256-WT60vnXnQtCNURE40qo+XSL1o4iYFvABy0NVaFhm7MI=",
