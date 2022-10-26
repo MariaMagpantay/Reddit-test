@@ -14,28 +14,35 @@
 else
 {
     <table>
-        <tr>
-            <th>Overskrift</th>
-            <th>Indhold</th>
-            <th colspan="3">Votes</th>
-        </tr>
+        
         @foreach (var tråd in tråde)
         {
             <tr>
-                <!-- 
+                Skrevet af: @tråd.Bruger.BrugerNavn
+                Dato: @tråd.Dato
+            </tr>
+            <tr><a href="/tråd/@tråd.TrådID">@tråd.Overskrift</a></tr>
+            <tr>
+                <!--
                     These a href links will match the route in the page 'PostItem.razor'.
                     The route is defined as "/post/{id}" and the id is the post id.
                 -->
-                <td><a href="/tråd/@tråd.TrådID">@tråd.Overskrift</a></td>
+                
                 <td>@tråd.Indhold</td>
-                <td>@(tråd.UpVotes - tråd.DownVotes)</td>
+            </tr>
+            <tr>
+                <td> Stemmer @(tråd.UpVotes - tråd.DownVotes)</td>
                 <td><button @onclick="() => UpVote(tråd.TrådID)">Upvote</button></td>
                 <td><button @onclick="() => DownVote(tråd.TrådID)">Downvote</button></td>
             </tr>
+
+            <br />
         }
     </table>
 
     <br/>
+    <CreateTråd></CreateTråd>
+
 }
 
 @code {
