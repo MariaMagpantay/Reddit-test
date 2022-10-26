@@ -20,6 +20,9 @@ div.contents {
 }
 </style>
 
+<!--Link tilbage til foresiden-->
+<a href="/">Klik her for at komme tilbage til forsiden</a>
+
 @if (Tråd == null)
 {
     <p><em>Loading...</em></p>
@@ -37,6 +40,7 @@ else
     <table>
         <tr>
             <th>Bruger</th>
+            <th>Dato</th>
             <th>Kommentar</th>
             <th colspan="3">Votes</th>
         </tr>
@@ -44,6 +48,7 @@ else
         {
             <tr>
                 <td>@kommentar.Bruger.BrugerNavn</td>
+                <td>@kommentar.Dato</td>
                 <td>@kommentar.Tekst</td>
                 <td>@(kommentar.UpVotes - kommentar.DownVotes)</td>
                 <td><button @onclick="() => UpVote(kommentar.KommentarID)">Upvote</button></td>

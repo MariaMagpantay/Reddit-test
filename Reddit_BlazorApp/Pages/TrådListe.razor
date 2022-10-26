@@ -1,4 +1,6 @@
-﻿@inherits LayoutComponentBase
+﻿@page "/tråde"
+
+@inherits LayoutComponentBase
 
 @using Reddit_BlazorApp.Data;
 @using Model;
@@ -13,6 +15,7 @@
 }
 else
 {
+    
     <table>
         
         @foreach (var tråd in tråde)
@@ -41,7 +44,7 @@ else
     </table>
 
     <br/>
-    <CreateTråd></CreateTråd>
+   
 
 }
 
